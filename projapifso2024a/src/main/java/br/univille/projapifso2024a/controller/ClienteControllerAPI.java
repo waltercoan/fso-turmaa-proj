@@ -33,7 +33,9 @@ public class ClienteControllerAPI {
             service.save(cliente);
             return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest()
+        
+            .build();
     }
 
 

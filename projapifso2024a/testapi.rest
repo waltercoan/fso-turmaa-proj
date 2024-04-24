@@ -7,6 +7,7 @@ POST http://localhost:8081/api/v1/clientes
 Content-Type: application/json
 
 {
+    "id":1,
     "nome": "Mariazinha",
     "endereco": "Rua lululul 200",
     "dataNascimento": "2024-04-23"
