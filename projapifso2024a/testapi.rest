@@ -1,1 +1,13 @@
+### GET /api/v1/clientes
 GET http://localhost:8081/api/v1/clientes
+
+
+### POST /api/v1/clientes
+POST http://localhost:8081/api/v1/clientes
+Content-Type: application/json
+
+{
+    "nome": "Mariazinha",
+    "endereco": "Rua lululul 200",
+    "dataNascimento": "2024-04-23"
+}
