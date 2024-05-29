@@ -29,6 +29,6 @@ namespace entity {
         
     }
 
-    Cliente "*" -> "1" Cidade
+    Cliente "cliente *" -> "1" Cidade
 }
 @enduml
