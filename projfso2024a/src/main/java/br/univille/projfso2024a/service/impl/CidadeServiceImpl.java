@@ -19,5 +19,22 @@ public class CidadeServiceImpl implements CidadeService{
     public List<Cidade> getAll() {
         return repository.findAll();
     }
+
+    @Override
+    public void save(Cidade cidade) {
+        repository.save(cidade);
+    }
+
+    @Override
+    public Cidade getById(long id) {
+        return repository.getById(id);
+    }
+
+    @Override
+    public Cidade delete(long id) {
+        var cidade = getById(id);
+        repository.delete(cidade);
+        return cidade;
+    }
     
 }

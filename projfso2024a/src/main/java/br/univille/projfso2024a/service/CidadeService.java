@@ -6,4 +6,7 @@ import br.univille.projfso2024a.entity.Cidade;
 
 public interface CidadeService {
     List<Cidade> getAll();
+    void save(Cidade cidade);
+    Cidade getById(long id);
+    Cidade delete(long id);
 }
