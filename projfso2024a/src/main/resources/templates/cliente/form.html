@@ -7,7 +7,8 @@
             <h1>Cliente</h1>
             <form th:action="@{/clientes}"
                 method="post"
-                th:object="${cliente}">
+                th:object="${cliente}"
+                enctype="multipart/form-data">
 
                 <input type="hidden" th:field="*{id}" >
 
@@ -39,7 +40,17 @@
                         
                     </select>
                 </div>
+                <div class="form-group">
+                    <div class="col-6">
+                        <img th:if="*{foto}" th:src="@{'/clientes/image/'+*{id}}" 
+                        style="width: 100px; height: 100px;">
+                    </div>
 
+                    <div class="col-6">
+                        <label>Foto:</label>
+                        <input type="file" name="file" class="form-control">
+                    </div>
+                </div>
                 <div class="form-group">
                     <button class="btn btn-primary"
                         type="submit">Enviar</button>

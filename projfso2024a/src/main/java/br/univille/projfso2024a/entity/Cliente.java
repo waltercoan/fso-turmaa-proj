@@ -29,6 +29,8 @@ public class Cliente {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
+    private String foto;
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Cidade cidade;
 
@@ -62,5 +64,11 @@ public class Cliente {
     }
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    public String getFoto() {
+        return foto;
     }
 }
