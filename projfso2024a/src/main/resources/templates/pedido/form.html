@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        <main class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            <h1>Pedido</h1>
+            <form th:action="@{/pedidos}"
+                method="post"
+                th:object="${pedido}">
+
+                <input type="hidden" th:field="*{id}" >
+
+                <div class="form-group">
+                    <label for="txtdata">Data</label>
+                    <input type="date" th:field="*{data}" 
+                        class="form-control"
+                        id="txtdata">
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Itens de Pedido Vinculados
+                        </h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="umItem, stat : *{colItens}">
+                                    <td th:text="${umItem.produto?.descricao}"></td>
+                                    <input type="hidden" 
+                                        th:field="*{colItens[__${stat.index}__].produto}">
+                                    <td th:text="${umItem.quantidade}"></td>
+                                    <input type="hidden" 
+                                        th:field="*{colItens[__${stat.index}__].quantidade}">
+                                    <td th:text="${umItem.valor}"></td>
+                                    <input type="hidden" 
+                                        th:field="*{colItens[__${stat.index}__].valor}">
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Novo Item de Pedido</h5>
+                    </div>
+                    <div class="form-group">
+                        <label for="cbproduto">Produto</label>
+                        <select id="cbproduto"
+                            th:field="${novoItem.produto}" 
+                            class="form-select">
+                            <option 
+                                th:each="umProduto : ${listaProdutos}"
+                                th:value="${umProduto.id}"
+                                th:text="${umProduto.descricao}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtquantidade">Quantidade</label>
+                        <input type="text" th:field="${novoItem.quantidade}" 
+                            class="form-control"
+                            id="txtquantidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtvalor">Valor</label>
+                        <input type="text" th:field="${novoItem.valor}" 
+                            class="form-control"
+                            id="txtvalor">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary"
+                            name="incitem"
+                            type="submit">Adicionar Item</button>
+                    </div>
+                </div>
+               
+                
+                <div class="form-group">
+                    <button class="btn btn-primary"
+                        name="save"
+                        type="submit">Enviar</button>
+                </div>
+
+            </form>
+        </main>
+
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html>
