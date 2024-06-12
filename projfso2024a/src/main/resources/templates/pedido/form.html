@@ -16,6 +16,9 @@
                     <input type="date" th:field="*{data}" 
                         class="form-control"
                         id="txtdata">
+                    <p th:if="${#fields.hasErrors('data')}"
+                    th:errors="*{data}"
+                    class="alert alert-danger"></p>
                 </div>
 
                 <div class="card">

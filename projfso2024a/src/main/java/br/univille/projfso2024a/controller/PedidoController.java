@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import br.univille.projfso2024a.entity.ItemPedido;
 import br.univille.projfso2024a.entity.Pedido;
 import br.univille.projfso2024a.service.PedidoService;
 import br.univille.projfso2024a.service.ProdutoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -55,10 +57,18 @@ public class PedidoController {
     }
 
     @PostMapping(params = "save")
-    public ModelAndView novo(Pedido pedido){
-        
+    public ModelAndView novo(@Valid Pedido pedido,
+                            BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            var listaProdutos = produtoService.getAll();
+            var novoItem = new ItemPedido();
+            HashMap<String,Object> dados = new HashMap<>();
+            dados.put("pedido",pedido);
+            dados.put("novoItem",novoItem);
+            dados.put("listaProdutos",listaProdutos);
+            return new ModelAndView("pedido/form", dados);
+        }
         pedidoService.save(pedido);
-         
         return new ModelAndView("redirect:/pedidos");
     }
 
