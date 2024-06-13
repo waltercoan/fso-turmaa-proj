@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import br.univille.projfso2024a.entity.Agendamento;
 import br.univille.projfso2024a.entity.Cliente;
 import br.univille.projfso2024a.entity.Produto;
+import br.univille.projfso2024a.repository.AgendamentoRepository;
+import br.univille.projfso2024a.service.AgendamentoService;
 import br.univille.projfso2024a.service.ClienteService;
 import br.univille.projfso2024a.service.ProdutoService;
 
@@ -17,6 +21,9 @@ public class Startup {
     private ClienteService clienteService;
     @Autowired
     private ProdutoService produtoService;
+    @Autowired
+    private AgendamentoService agendamentoService;
+
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
         var cliente1 = new Cliente();
@@ -35,7 +42,9 @@ public class Startup {
         prod2.setValor(4500f);
         produtoService.save(prod2);
 
-
-
+        var agendamento = new Agendamento();
+        agendamento.setData(new Date());
+        agendamento.setDescricao("Zezinho");
+        agendamentoService.save(agendamento);
     }
 }
