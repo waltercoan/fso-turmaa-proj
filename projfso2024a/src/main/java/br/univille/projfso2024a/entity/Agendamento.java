@@ -19,6 +19,18 @@ public class Agendamento {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data;
+
+
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "hh:mm")
+    private Date hora;
+    
+    public Date getHora() {
+        return hora;
+    }
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
     private String descricao;
 
     public String getDescricao() {

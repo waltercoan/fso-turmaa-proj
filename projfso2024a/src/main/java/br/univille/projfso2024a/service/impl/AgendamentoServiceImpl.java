@@ -1,6 +1,7 @@
 package br.univille.projfso2024a.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class AgendamentoServiceImpl
     }
 
     @Override
-    public Agendamento getByDate(Date data) {
-        return repository.findByData(data);
+    public List<Agendamento> getAllByDate(Date data) {
+        return repository.findAllByData(data);
     }
     
 }

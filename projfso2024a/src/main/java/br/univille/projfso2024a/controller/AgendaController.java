@@ -44,9 +44,9 @@ public class AgendaController {
                 var dayWeek = data.getDayOfWeek();
                 if(dayWeek.getValue() == diacalend){
                     dayValue = data;
-                    var agendamento = service.getByDate(new Date(dayValue.getYear()-1900, dayValue.getMonth().ordinal(), dayValue.getDayOfMonth()));
-                    if(agendamento != null)
-                        dia.getListaAgendamentos().add(agendamento);
+                    var agendamentos = service.getAllByDate(new Date(dayValue.getYear()-1900, dayValue.getMonth().ordinal(), dayValue.getDayOfMonth()));
+                    if(agendamentos.size() != 0)
+                        dia.getListaAgendamentos().addAll(agendamentos);
                     data = data.plusDays(1);
                     dia.setDia(dayValue.getDayOfMonth());
                     dia.setMes(dayValue.getMonth().ordinal());

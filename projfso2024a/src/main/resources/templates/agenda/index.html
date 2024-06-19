@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head th:include="layout :: htmlhead"></head>
+    <style>
+      .fso-titulo {
+        background-color: cornflowerblue;
+        border: 1px solid black;
+      }
+      .fso-dia {
+        background-color: whitesmoke;
+        border: 1px solid black;
+        min-width: 111px;
+        min-height: 64px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        
+      }
+    </style>
     <body>
         
         <nav th:replace="layout :: menu">(menu)</nav>
@@ -8,22 +25,25 @@
         <h5 th:text="'AGENDA: ' + ${agenda.mes}+'/'+${agenda.ano}"></h5>
         <div class="text-center">
             <div class="row justify-content-center">
-              <div class="col">Segunda</div>
-              <div class="col">Terça</div>
-              <div class="col">Quarta</div>
-              <div class="col">Quinta</div>
-              <div class="col">Sexta</div>
-              <div class="col">Sábado</div>
-              <div class="col">Domingo</div>
+              <div class="col fso-titulo">Segunda</div>
+              <div class="col fso-titulo">Terça</div>
+              <div class="col fso-titulo">Quarta</div>
+              <div class="col fso-titulo">Quinta</div>
+              <div class="col fso-titulo">Sexta</div>
+              <div class="col fso-titulo">Sábado</div>
+              <div class="col fso-titulo">Domingo</div>
             </div>
             <div class="row justify-content-center" th:each="semana : ${agenda.listaSemanas}">
-              <div class="col" 
+              <div class="col fso-dia" 
                   th:each="dia : ${semana.listaDias}">
                   <div th:if="${dia.dia != 0}">
                     <span th:text="${dia.dia}"></span>
-                    <p th:each="agendamento : ${dia.listaAgendamentos}">
-                      <span th:text="${agendamento.descricao}"></span>
-                    </p>
+
+                      <ul>
+                        <li th:each="agendamento : ${dia.listaAgendamentos}"
+                        th:if="${agendamento}"
+                        th:text="${agendamento.hora + '/' + agendamento.descricao}"></li>
+                      </ul>
                   </div>
               </div>
             </div>

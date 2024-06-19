@@ -44,7 +44,14 @@ public class Startup {
 
         var agendamento = new Agendamento();
         agendamento.setData(new Date());
+        agendamento.setHora(new Date());
         agendamento.setDescricao("Zezinho");
+        agendamentoService.save(agendamento);
+        
+        agendamento = new Agendamento();
+        agendamento.setData(new Date());
+        agendamento.setHora(new Date());
+        agendamento.setDescricao("Mariazinha");
         agendamentoService.save(agendamento);
     }
 }
