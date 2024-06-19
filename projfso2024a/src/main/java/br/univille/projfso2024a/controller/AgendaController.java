@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,14 +25,28 @@ public class AgendaController {
 
     @Autowired
     private AgendamentoService service;
-    @GetMapping
-    public ModelAndView index(){
+    @GetMapping({"","/","/{mes}/{ano}"})
+    public ModelAndView index(@PathVariable(name="mes",required = false) Integer mes,
+                                @PathVariable(name="ano",required = false) Integer ano) {
 
         HashMap<String,Object> dados = new HashMap<>();
         
         var agenda = new Agenda();
-        agenda.setMes(6);
-        agenda.setAno(2024);
+        if(mes == null || ano == null){
+            var today = LocalDate.now();
+            mes = today.getMonthValue();
+            ano = today.getYear();
+        }
+        if(mes > 12){
+            mes = 1;
+            ano = ano + 1;
+        }
+        if(mes < 1){
+            mes = 12;
+            ano = ano - 1;
+        }
+        agenda.setMes(mes);
+        agenda.setAno(ano);
 
         var data = LocalDate.of(agenda.getAno(), agenda.getMes(), 1);
         for(int semanacalend=1; semanacalend <= 6; semanacalend++){

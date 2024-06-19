@@ -5,6 +5,7 @@
       .fso-titulo {
         background-color: cornflowerblue;
         border: 1px solid black;
+        font-weight: bold;
       }
       .fso-dia {
         background-color: whitesmoke;
@@ -23,6 +24,8 @@
         <nav th:replace="layout :: menu">(menu)</nav>
         <main class="container">
         <h5 th:text="'AGENDA: ' + ${agenda.mes}+'/'+${agenda.ano}"></h5>
+        <a th:href="${'/agenda/'+(agenda.mes-1)+'/'+agenda.ano}">Anterior</a>
+        <a th:href="${'/agenda/'+(agenda.mes+1)+'/'+agenda.ano}">Próximo</a>
         <div class="text-center">
             <div class="row justify-content-center">
               <div class="col fso-titulo">Segunda</div>
