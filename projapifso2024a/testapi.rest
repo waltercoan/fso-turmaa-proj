@@ -1,21 +1,37 @@
+# @name signin
+POST http://localhost:8081/api/v1/auth/signin
+Content-Type: application/json
+
+{
+    "usuario": "admin",
+    "senha": "admin"
+}
+
+###
+@token = {{signin.response.body.*}}
+
 ### POST /api/v1/cidade
 POST http://localhost:8081/api/v1/cidades
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "nome": "Joinville",
     "estado": "Santa Catarina"
 }
+
 ### GET /api/v1/clientes
 GET http://localhost:8081/api/v1/cidades
+Authorization: Bearer {{token}}
 
 ### GET /api/v1/clientes
 GET http://localhost:8081/api/v1/clientes
-
+Authorization: Bearer {{token}}
 
 ### POST /api/v1/clientes
 POST http://localhost:8081/api/v1/clientes
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "nome": "Mariazinha",
@@ -30,6 +46,7 @@ Content-Type: application/json
 ### PUT /api/v1/clientes
 PUT http://localhost:8081/api/v1/clientes/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "nome": "Zezinho da Silva",
@@ -40,3 +57,4 @@ Content-Type: application/json
 
 ### DELETE /api/v1/clientes
 DELETE http://localhost:8081/api/v1/clientes/1
+Authorization: Bearer {{token}}
